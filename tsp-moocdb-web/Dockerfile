@@ -25,6 +25,9 @@ RUN sed -i "s/MaxSpareServers      10/MaxSpareServers       1/g" /etc/apache2/ap
 # Copy the index file
 COPY index /var/www/
 
+COPY tp.conf /etc/apache2/sites-available/
+RUN ln -s ../sites-available/tp.conf /etc/apache2/sites-enabled/010-tp.conf
+
 # Checkout the bdsqlwiz application from its git repo
 RUN \
   apt-get install git -y --force-yes --no-install-recommends && \
